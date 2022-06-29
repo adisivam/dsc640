@@ -1,0 +1,78 @@
+---
+title: "Assignment_Week_3&4_Venkidusamy_KesavAdithya"
+technology: "R"
+Course: "DSC640"
+author: "Kesav Adithya Venkidusamy"
+date: "2022/06/24"
+output: pdf_document
+---
+
+
+```{r libraries}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(ggplot2)
+library(tidyverse)
+library(treemapify)
+
+```
+
+# Data Loading
+```{r tree}
+
+post_df <- read_excel("E:/Personal/Bellevue University/Course/github/dsc640/Week 3&4/us-postage.xlsm")
+head(post_df)
+
+# Total number of records present in the data set
+nrow(post_df)
+
+## Create Tree Chart
+
+ggplot(post_df, aes(area = Price, fill = Year, label = Price)) + geom_treemap() + geom_treemap_text() + ggtitle("R: Tree Chart for Postal Price by Year")
+
+```
+```{r area}
+
+pop_df <- read_excel("E:/Personal/Bellevue University/Course/github/dsc640/Week 3&4/world-population.xlsm")
+head(pop_df)
+
+# Total number of records present in the data set
+nrow(pop_df)
+
+## Create Area Chart
+
+ggplot(pop_df, aes(x=Year, y=Population)) +
+  geom_area( fill="#87CEFA", alpha=0.4) +
+  geom_line(color="#87CEFA", size=2) +
+  geom_point(size=3, color="#87CEFA") +
+  ggtitle("R: Area Chart for World Population by Year")
+  
+
+```
+```{r stacked}
+
+unemp_df <- read_csv("E:/Personal/Bellevue University/Course/github/dsc640/Week 3&4/unemployement-rate-1948-2010.csv")
+head(unemp_df)
+
+# Total number of records present in the data set
+nrow(unemp_df)
+
+## Create Stacked Area Chart
+
+ggplot(unemp_df, aes(x=Year, y=Value, fill=Period)) + 
+    geom_area() + ggtitle("R: Stacked Area Chart for Unemployment Rate by Year for Various Periods")
+```
+
+```{r step}
+
+pop_df <- read_excel("E:/Personal/Bellevue University/Course/github/dsc640/Week 3&4/world-population.xlsm")
+head(pop_df)
+
+# Total number of records present in the data set
+nrow(pop_df)
+
+## Create Step Chart
+
+ggplot(pop_df, aes(x=Year, y=Population)) + geom_step() + ggtitle("R: Step Chart for World Population by Year")
+```
