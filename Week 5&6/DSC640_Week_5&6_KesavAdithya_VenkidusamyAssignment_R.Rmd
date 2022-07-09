@@ -1,0 +1,65 @@
+---
+title: "Assignment_Week_5&6_Venkidusamy_KesavAdithya"
+technology: "R"
+Course: "DSC640"
+author: "Kesav Adithya Venkidusamy"
+date: "2022/07/05"
+output: pdf_document
+---
+
+
+```{r libraries}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(ggplot2)
+library(dplyr)
+```
+
+# Data Loading
+```{r scatter}
+
+# Creating dataframe
+crime_df <- read.csv("E:/Personal/Bellevue University/Course/github/dsc640/Week 5&6/crimerates-by-state-2005.csv")
+head(crime_df)
+
+# Total number of records present in the data set
+nrow(crime_df)
+
+# Scatter Plot
+ggplot(crime_df, aes(x=robbery, y=motor_vehicle_theft)) + geom_point() + ggtitle("R: Scatter Plot for for Robbery vs Motor Vehicle Theft")
+
+```
+```{r bubble}
+
+## Creating dataframe
+crime_df <- read.csv("E:/Personal/Bellevue University/Course/github/dsc640/Week 5&6/crimerates-by-state-2005.csv")
+head(crime_df)
+
+# Total number of records present in the data set
+nrow(crime_df)
+
+# Filter outliers
+crime_us_df <- filter(crime_df, state != 'United States')
+crime_us_df <- filter(crime_us_df, state != 'District of Columbia')
+
+# Total number of records present in the data set
+nrow(crime_df)
+
+## Create Bubble Chart
+ggplot(crime_us_df, aes(x=burglary, y=motor_vehicle_theft, size=population, color = population))+geom_point(alpha=0.5) + scale_size(range = c(.1, 24), name="Population") + ggtitle("R: Bubble Chart for Burglary vs Motor Vehicle Theft by Population")
+
+```
+```{r density}
+
+birth_df <- read.csv("E:/Personal/Bellevue University/Course/github/dsc640/Week 5&6/birth-rates-yearly.csv")
+head(birth_df)
+
+# Total number of records present in the data set
+nrow(birth_df)
+
+## Create Stacked Area Chart
+
+ggplot(birth_df, aes(x=rate)) + 
+    geom_density(color = 'darkblue', fill = 'lightblue', alpha = 0.8) + ggtitle("R: Density Chart for Birth Rate")
+```
