@@ -28,7 +28,7 @@ nrow(ppg_df)
 
 # Scatter Plot
 df1 <- data.frame(ppg_df[,-1], row.names = ppg_df[,1])
-heatmap(as.matrix(df1), scale="column",col=heat.colors(100),main="R: Heat Map Chart to show NBA Per Game Performance",Rowv=NA, Colv=NA)
+heatmap(as.matrix(df1), scale="column",col=heat.colors(100),main="             R: Heat Map Chart to show NBA Per Game Performance",Rowv=NA, Colv=NA)
 
 ```
 ```{r contour}
