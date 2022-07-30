@@ -1,0 +1,70 @@
+---
+title: "Assignment_Week_7&8_Venkidusamy_KesavAdithya"
+technology: "R"
+Course: "DSC640"
+author: "Kesav Adithya Venkidusamy"
+date: "2022/07/22"
+output: pdf_document
+---
+
+
+```{r libraries}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(ggplot2)
+library(dplyr)
+```
+
+# Data Loading
+```{r heat}
+
+# Creating dataframe
+ppg_df <- read.csv("E:/Personal/Bellevue University/Course/github/dsc640/Week 7&8/ppg2008.csv")
+head(ppg_df)
+
+# Total number of records present in the data set
+nrow(ppg_df)
+
+# Scatter Plot
+df1 <- data.frame(ppg_df[,-1], row.names = ppg_df[,1])
+heatmap(as.matrix(df1), scale="column",col=heat.colors(100),main="R: Heat Map Chart to show NBA Per Game Performance",Rowv=NA, Colv=NA)
+
+```
+```{r contour}
+
+## Create Contour Chart
+
+ggplot(data=ppg_df, aes(x=PTS, y=MIN)) +
+  ylim(15,50) +
+  geom_point(alpha=0.1, col="red") + 
+  geom_density_2d() +
+  ggtitle("R - Contour plot for PTS and MIN") +
+  theme(plot.title = element_text(hjust=0.5)) +
+  labs(x="Points", y="Minutes")
+
+
+```
+```{r map}
+
+# Creating dataframe
+costco_df <- read.csv("E:/Personal/Bellevue University/Course/github/dsc640/Week 7&8/costcos-geocoded.csv")
+head(costco_df)
+
+# Total number of records present in the data set
+nrow(costco_df)
+
+library(maps)
+library(mapdata)
+usa <- map_data("usa")
+
+cost <- costco_df[costco_df$Longitude > -130,]
+gg1 <- ggplot() + 
+  geom_polygon(data = usa, aes(x=long, y = lat, group = group), fill = "lightblue", color = "blue") + 
+  coord_fixed(1.3)
+gg1 + 
+  geom_point(data=cost, aes(x=Longitude,y=Latitude), color="black",size=2)+
+  geom_point(data=cost, aes(x=Longitude,y=Latitude), color="blue",size=1)+
+  ggtitle("R - Saptial Map For Costco Store Locations")
+
+```
